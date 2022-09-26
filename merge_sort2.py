@@ -1,4 +1,4 @@
-#배열 사용 최소화하여 merge_sort 수행하기
+#인덱스를 이용하여 분할된 배열을 표시하여 배열 사용을 최소화한 merge_sort 수행하기
 def merge_sort2(arr):
     def sort(low, high):
         if high - low < 2:

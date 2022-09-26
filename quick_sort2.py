@@ -1,6 +1,6 @@
 import random
 
-# 배열을 추가로 사용하지 않고 퀵정렬 실행
+# 배열을 추가로 사용하지 않고 내부에서 기준에 맞춰 자리를 교환하며 퀵정렬 실행
 cycle = 0
 def sorting(arr, start, end):
     if end <= start:
