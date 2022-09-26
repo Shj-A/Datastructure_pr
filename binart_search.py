@@ -18,9 +18,6 @@ def binary_search(arr,data):
     return pos
 
 
-
-
-
 if __name__ == '__main__':
     sample = [168,162,120,50,150,188]
     data = 168
