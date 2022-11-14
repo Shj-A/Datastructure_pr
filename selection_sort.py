@@ -1,14 +1,14 @@
-#처음부터 차례대로 최솟값을 찾아 맨 앞으로 옮기는 방식
+#현재 배열에서 최솟값을 찾아 가장 앞부분 값과 교환하는 동작을 배열의 길이를 줄여가며 반복하여 정렬하는 방식
 def selection_sort(arr):
     if len(arr) <= 1:
         return arr
 
     for i in range(len(arr)-1):
-        min_idx = i
+        max_idx = i
         for j in range(i+1,len(arr)):
-            if arr[j] <= arr[min_idx]:
-                min_idx = j
-        arr[i],arr[min_idx] = arr[min_idx], arr[i]
+            if arr[j] > arr[max_idx]:
+                max_idx = j
+        arr[i],arr[max_idx] = arr[max_idx], arr[i]
 
     return arr
 
