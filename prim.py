@@ -33,18 +33,18 @@ def prim(graph, point):
             print(min_item,"pass")#목적 노드가 이미 방문된 노드라면 pass(사이클 방지)
             pass
         else:
+            #목적 노드가 방문한 적 없으므로 방문처리 후 간선과 가중치값 추가기록
             visited.append(des)
             edge_list.append(min_item)
             print(visited)
             weight_sum += weight
 
-            for item in enumerate(graph[des]):
+            for item in enumerate(graph[des]): # 목적노드에 연결된 간선들을 우선순위큐에 추가
                 new_des = item[0]
                 new_weight = item[1]
-                if new_des not in visited:
-                    if new_weight != 0:
-                        heapq.heappush(q, (new_weight, des, new_des))
-                        print(q)
+                if new_weight != 0:
+                    heapq.heappush(q, (new_weight, des, new_des))
+                    print(q)
                 else:
                     pass
 
@@ -63,4 +63,6 @@ G1.graph[대전][서울] = 11; G1.graph[대전][속초] = 12; G1.graph[대전][�
 G1.graph[광주][서울] = 50; G1.graph[광주][대전] = 20; G1.graph[광주][부산] = 25
 G1.graph[부산][대전] = 30; G1.graph[부산][광주] = 25
 
-print(prim(G1.graph,0))
+for i in range(gsize):
+    print(prim(G1.graph,i))
+    print('--------------------------------------------')

@@ -8,13 +8,13 @@ class Graph():
 namearr = ["춘천","서울",'속초','대전','광주','부산']
 춘천,서울,속초,대전,광주,부산 = 0,1,2,3,4,5
 
-def find(parent, x):
+def find(parent, x): #x노드와 부모노드 배열을 입력받아 root노드를 찾는 함수
     if parent[x] == x:
         return x
     parent[x] = find(parent, parent[x])
     return parent[x]
 
-def union(parent, a, b):
+def union(parent, a, b): #두 노드의 root 노드를 찾아 작은 인덱스의 root 노드로 변경하는 함수
     rootA = find(parent, a)
     rootB = find(parent, b)
 
@@ -43,13 +43,14 @@ for i in range(gsize):
         if G1.graph[i][k] != 0 :
             tempary.append([G1.graph[i][k],i,k])
 
+# tempary의 각 아이템의 0번째 요소(가중치)를 기준으로 정렬
 tempary = sorted(tempary,key=itemgetter(0))
 edgelist = []
-for i in range(0,len(tempary),2) :
+for i in range(0,len(tempary),2): #중복되는 간선 제거
     edgelist.append(tempary[i])
 print(edgelist)
 
-#parent list
+#각 노드의 parent를 자기 자신으로 초기화
 parent = [0]*gsize
 for i in range(gsize):
     parent[i] = i
@@ -58,9 +59,10 @@ for i in range(gsize):
 res = []
 for edge in edgelist:
     cost, start, end = edge
+    # 간선으로 연결된 start노드와 end노드가 같은 집합이 아니면 해당 간선을 선택하고 두 노드의 root노드 갱신
     if find(parent, start) != find(parent,end):
         union(parent,start,end)
-        info = [cost, namearr[start], namearr[end]]
+        info = (cost, namearr[start], namearr[end])
         res.append(info)
     if len(res) == gsize -1:
         break
