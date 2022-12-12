@@ -7,7 +7,52 @@ class Graph():
 G1 = None
 stack = []
 visited = []
-top = -1
+
+def recursive_dfs(start_node, graph,visited):
+    visited.append(start_node)
+    for visiting_node,route in enumerate(graph[start_node]):
+        if route != 0:
+            if visiting_node not in visited:
+                recursive_dfs(visiting_node,graph, visited)
+    return visited
+
+def DFS(start_node,graph):
+    top = -1
+    current = start_node
+    stack.append(current)
+    visited.append(current)
+    top += 1
+
+    while (top > -1):
+        next = None
+        print('current =', current)
+        for vertex in range(8):
+            if graph[current][vertex] == 1:
+                if vertex in visited:
+                    pass
+                else:
+                    next = vertex
+                    break
+        print('next =', next)
+        if next != None:
+            current = next
+            stack.append(current)
+            top += 1
+            print(top)
+            visited.append(current)
+            print('visited =', visited)
+            print('stack =', stack, '\n')
+        else:
+            stack.pop(top)
+            top -= 1
+            if top <= -1:
+                break
+            current = stack[top]
+            print(top)
+            print('current =', current)
+            print('stack =', stack, '\n')
+
+    return visited
 
 #그래프 간선 생성
 G1 = Graph(8)
@@ -32,39 +77,9 @@ G1.graph[7][6] = 1
 
 print(G1.graph)
 
-current = 0
-stack.append(current)
-visited.append(current)
-top += 1
+print(DFS(0,G1.graph))
+visited = []
+print(recursive_dfs(0, G1.graph,visited))
 
-while (top > -1) :
-    next = None
-    print('current =',current)
-    for vertex in range(8):
-        if G1.graph[current][vertex] == 1:
-            if vertex in visited:
-                pass
-            else:
-                next = vertex
-                break
-    print('next =',next)
-    if next != None:
-        current = next
-        stack.append(current)
-        top += 1
-        print(top)
-        visited.append(current)
-        print('visited =',visited)
-        print('stack =',stack,'\n')
-    else:
-        stack.pop(top)
-        top -= 1
-        if top <= -1:
-            break
-        current = stack[top]
-        print(top)
-        print('current =', current)
-        print('stack =',stack,'\n')
 
-for i in visited:
-    print(i+1, end=' ')
+
